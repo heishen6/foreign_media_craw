@@ -1,0 +1,40 @@
+{
+    "db": {
+        "user": "yonglee_llm_admin",
+        "password": "yonglee_llm",
+        "host": "115.175.21.159",
+        "port": "5432",
+        "dbname": "news_monitor_db",
+        "table_name": "foreign_media"
+    },
+    "feishu_webhook": "https://open.feishu.cn/open-apis/bot/v2/hook/98a8b792-f646-40b1-82e5-5c7c2f36e7ab",
+    "keywords": ["China", "Chinese", "Beijing", "PRC", "中国"],
+    "sources": {
+        "reuters": {
+            "name_zh": "路透社",
+            "sitemap_url": "https://www.reuters.com/arc/outboundfeeds/news-sitemap-index/?outputType=xml"
+        },
+        "bloomberg": {
+            "name_zh": "彭博社",
+            "sitemap_url": "https://www.bloomberg.com/sitemaps/news/latest.xml"
+        },
+        "ft": {
+            "name_zh": "金融时报",
+            "sitemap_url": "https://www.ft.com/news-feed?format=rss"
+        },
+        "financialjuice": {
+            "name_zh": "FinancialJuice",
+            "sitemap_url": "https://www.financialjuice.com/feed.ashx?xy=rss"
+        }
+    },
+    "llm": {
+        "model_name": "deepseek-chat",
+        "temperature": 0.6,
+        "timeout": 10,
+        "max_tokens": 1000,
+        "api_key": "sk-66c060481ead4e8aadac898ac6e1d11c",
+        "base_url": "https://api.deepseek.com"
+    },
+    "update_interval_seconds": 3
+}
+

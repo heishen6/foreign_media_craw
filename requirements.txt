@@ -1,0 +1,10 @@
+requests
+psycopg2-binary
+langchain
+langchain-core
+langchain-community
+langchain-openai
+beautifulsoup4
+lxml
+requests-toolbelt
+psycopg2
