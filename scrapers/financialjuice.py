@@ -81,7 +81,7 @@ class FinancialJuiceScraper(BaseScraper):
                             formatted_time = self.format_time(publication_date)
                             # Include description in notification if present
                             # User requested NO URL for FinancialJuice
-                            desc_snippet = f"\n摘要: {description_zh[:100]}..." if description_zh else ""
+                            desc_snippet = f"\n摘要: {description_zh}" if description_zh else ""
                             msg = f"{self.name_zh} ：{title_zh}\n{formatted_time}{desc_snippet}"
                             self.feishu_handler.to_feishu(self.feishu_handler.url, msg)
 

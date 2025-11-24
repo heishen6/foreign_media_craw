@@ -7,4 +7,3 @@ langchain-openai
 beautifulsoup4
 lxml
 requests-toolbelt
-psycopg2

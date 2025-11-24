@@ -88,8 +88,8 @@ class FinancialTimesScraper(BaseScraper):
                         if is_new:
                             logging.info(f"新文章入库(中文): {title_zh}")
                             formatted_time = self.format_time(publication_date)
-                            
-                            msg = f"{self.name_zh} ：{title_zh}\n{link}\n{formatted_time}\n摘要: {description_zh[:100]}..."
+
+                            msg = f"{self.name_zh} ：{title_zh}\n{link}\n{formatted_time}\n摘要: {description_zh}"
                             self.feishu_handler.to_feishu(self.feishu_handler.url, msg)
 
                 except Exception as e:
