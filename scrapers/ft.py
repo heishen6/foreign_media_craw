@@ -12,7 +12,10 @@ class FinancialTimesScraper(BaseScraper):
         self.name_zh = self.source_conf["name_zh"]
 
     def scrape(self):
-        url = self.source_conf["sitemap_url"]
+        import time as _time
+        # 添加时间戳参数绕过 FT CDN 缓存，确保获取最新 RSS 内容
+        base_url = self.source_conf["sitemap_url"]
+        url = f"{base_url}&_={int(_time.time())}"
         content = self.fetch(url)
         if not content:
             return

@@ -13,7 +13,9 @@ class ReutersScraper(BaseScraper):
         self.name_zh = self.source_conf["name_zh"]
 
     def scrape(self):
-        url = self.source_conf["sitemap_url"]
+        # 添加时间戳参数绕过 CDN 缓存
+        base_url = self.source_conf["sitemap_url"]
+        url = f"{base_url}&_={int(time.time())}"
         content = self.fetch(url)
         if not content:
             return
@@ -22,9 +24,9 @@ class ReutersScraper(BaseScraper):
             # Reuters sitemap index usually points to sub-sitemaps.
             # But let's try to parse it. If it has <sitemap> tags, we follow them.
             # If it has <url> tags, we process them.
-            
+
             soup = BeautifulSoup(content, 'xml')
-            
+
             # Check if it is a sitemap index
             sitemaps = soup.find_all('sitemap')
             if sitemaps:
@@ -32,6 +34,8 @@ class ReutersScraper(BaseScraper):
                 # sitemaps[0] 包含最新的新闻（已通过实际测试验证）
                 # 所有子sitemap的lastmod时间相同，因此无需比较lastmod
                 target_sitemap_url = sitemaps[0].find('loc').text
+                # 子sitemap也加时间戳
+                target_sitemap_url = f"{target_sitemap_url}&_={int(time.time())}"
                 logging.debug(f"路透社: 正在获取最新sitemap: {target_sitemap_url}")
                 content = self.fetch(target_sitemap_url)
                 if not content:

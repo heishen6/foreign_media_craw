@@ -12,7 +12,9 @@ class FinancialJuiceScraper(BaseScraper):
         self.name_zh = self.source_conf["name_zh"]
 
     def scrape(self):
-        url = self.source_conf["sitemap_url"]
+        # 添加时间戳参数绕过 CDN 缓存
+        base_url = self.source_conf["sitemap_url"]
+        url = f"{base_url}&_={int(time.time())}"
         content = self.fetch(url)
         if not content:
             return
