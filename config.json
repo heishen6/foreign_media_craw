@@ -7,7 +7,10 @@
         "dbname": "news_monitor_db",
         "table_name": "foreign_media"
     },
-    "feishu_webhook": "https://open.feishu.cn/open-apis/bot/v2/hook/98a8b792-f646-40b1-82e5-5c7c2f36e7ab",
+    "feishu_webhooks": [
+        "https://open.feishu.cn/open-apis/bot/v2/hook/98a8b792-f646-40b1-82e5-5c7c2f36e7ab",
+        "https://open.feishu.cn/open-apis/bot/v2/hook/3c40a2a3-7208-4656-a4e3-ab37d77e1daf"
+    ],
     "keywords": ["China", "Chinese", "Beijing", "PRC", "中国"],
     "sources": {
         "reuters": {

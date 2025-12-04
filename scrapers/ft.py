@@ -93,7 +93,7 @@ class FinancialTimesScraper(BaseScraper):
                             formatted_time = self.format_time(publication_date)
 
                             msg = f"{self.name_zh} ：{title_zh}\n{link}\n{formatted_time}\n摘要: {description_zh}"
-                            self.feishu_handler.to_feishu(self.feishu_handler.url, msg)
+                            self.feishu_handler.broadcast(msg)
 
                 except Exception as e:
                     logging.error(f"处理条目出错: {e}")

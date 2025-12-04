@@ -90,8 +90,8 @@ def main():
         db_handler = DBHandler(config["db"])
         translator = Translator(config["llm"])
 
-        # Initialize Feishu handler with webhook URL from config
-        feishu_handler = FeishuHandler(config["feishu_webhook"])
+        # Initialize Feishu handler with webhook URLs from config
+        feishu_handler = FeishuHandler(config["feishu_webhooks"])
     except psycopg2.Error as e:
         logging.error(f"数据库初始化失败: {e}")
         return

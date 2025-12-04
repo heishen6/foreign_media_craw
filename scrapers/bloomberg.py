@@ -68,7 +68,7 @@ class BloombergScraper(BaseScraper):
                             logging.info(f"新文章入库(中文): {title_zh}")
                             formatted_time = self.format_time(publication_date)
                             msg = f"{self.name_zh} ：{title_zh}\n{loc}\n{formatted_time}"
-                            self.feishu_handler.to_feishu(self.feishu_handler.url, msg)
+                            self.feishu_handler.broadcast(msg)
 
                 except Exception as e:
                     logging.error(f"处理条目出错: {e}")

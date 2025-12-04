@@ -85,7 +85,7 @@ class FinancialJuiceScraper(BaseScraper):
                             # User requested NO URL for FinancialJuice
                             desc_snippet = f"\n摘要: {description_zh}" if description_zh else ""
                             msg = f"{self.name_zh} ：{title_zh}\n{formatted_time}{desc_snippet}"
-                            self.feishu_handler.to_feishu(self.feishu_handler.url, msg)
+                            self.feishu_handler.broadcast(msg)
 
                 except Exception as e:
                     logging.error(f"处理条目出错: {e}")

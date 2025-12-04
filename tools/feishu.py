@@ -19,11 +19,17 @@ AT_ALL = "<at user_id=\"all\">所有人</at>"
 
 
 class FeishuHandler(logging.Handler):
-    def __init__(self, url, mute=False):
+    def __init__(self, urls, mute=False):
         super().__init__()
-        self.url = url
+        # 支持单个URL或URL列表
+        if isinstance(urls, str):
+            self.urls = [urls]
+        else:
+            self.urls = list(urls)
+        # 保留 self.url 兼容旧代码
+        self.url = self.urls[0] if self.urls else None
         self.mute = mute
-    
+
     @classmethod
     def to_feishu(cls, url, msg):
         payload_message = {
@@ -44,17 +50,25 @@ class FeishuHandler(logging.Handler):
             except BaseException as e:
                 # traceback.print_exc()
                 print(f"Feishu to {url} failed [{retry}/{max_retry}] times, retrying")
+                retry += 1
                 time.sleep(1)
                 continue
-        
+
+    def broadcast(self, msg):
+        """向所有配置的webhook发送消息"""
+        if self.mute:
+            return
+        for url in self.urls:
+            FeishuHandler.to_feishu(url, msg)
+
     def emit(self, msg):
         msg = self.format(msg)
-        FeishuHandler.msg(self.url, msg)
-    
+        self.broadcast(msg)
+
     def msg(self, msg):
         if self.mute:
-            return 
-        FeishuHandler.to_feishu(self.url, msg)
+            return
+        self.broadcast(msg)
     
 
 def upload_img(web_hook, img_path=None):
