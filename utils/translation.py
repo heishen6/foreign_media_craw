@@ -10,8 +10,7 @@ class Translator:
             temperature=config["temperature"],
             openai_api_key=config.get("api_key"),
             openai_api_base=config.get("base_url"),
-            timeout=config.get("timeout", 10),
-            max_tokens=config.get("max_tokens", 1000)
+            timeout=config.get("timeout", 10)
         )
         
     def translate_title(self, title):
